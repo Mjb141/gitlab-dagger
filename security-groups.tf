@@ -12,7 +12,7 @@ resource "aws_security_group" "dagger" {
   vpc_id = aws_vpc.vpc.id
 }
 
-resource "aws_vpc_security_group_ingress_rule" "dagger-tcp" {
+resource "aws_vpc_security_group_ingress_rule" "dagger_tcp" {
   description = "Allow TCP traffic on port 1234 from the Gitlab Runner instance"
 
   security_group_id = aws_security_group.dagger.id
@@ -28,7 +28,7 @@ resource "aws_vpc_security_group_ingress_rule" "dagger-tcp" {
   }
 }
 
-resource "aws_vpc_security_group_egress_rule" "gitlab-all-out-443" {
+resource "aws_vpc_security_group_egress_rule" "gitlab_all_out_443" {
   description = "Allow port 443 outbound from Gitlab"
 
   security_group_id = aws_security_group.runner.id
@@ -40,7 +40,7 @@ resource "aws_vpc_security_group_egress_rule" "gitlab-all-out-443" {
   cidr_ipv4 = "0.0.0.0/0"
 }
 
-resource "aws_vpc_security_group_egress_rule" "gitlab-all-out-80" {
+resource "aws_vpc_security_group_egress_rule" "gitlab_all_out_80" {
   description = "Allow port 80 outbound from Gitlab"
 
   security_group_id = aws_security_group.runner.id
@@ -52,7 +52,7 @@ resource "aws_vpc_security_group_egress_rule" "gitlab-all-out-80" {
   cidr_ipv4 = "0.0.0.0/0"
 }
 
-resource "aws_vpc_security_group_egress_rule" "dagger-all-out-443" {
+resource "aws_vpc_security_group_egress_rule" "dagger_all_out_443" {
   description = "Allow port 443 outbound from Dagger"
 
   security_group_id = aws_security_group.dagger.id
@@ -64,7 +64,7 @@ resource "aws_vpc_security_group_egress_rule" "dagger-all-out-443" {
   cidr_ipv4 = "0.0.0.0/0"
 }
 
-resource "aws_vpc_security_group_egress_rule" "dagger-all-out-80" {
+resource "aws_vpc_security_group_egress_rule" "dagger_all_out_80" {
   description = "Allow port 80 outbound from Dagger"
 
   security_group_id = aws_security_group.dagger.id

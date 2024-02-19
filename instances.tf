@@ -16,23 +16,25 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "runner" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
 
   subnet_id = aws_subnet.private.id
 
-  key_name = var.key_pair
+  key_name             = var.key_pair
+  iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 
   instance_market_options {
     market_type = "spot"
     spot_options {
-      max_price = 0.01
+      max_price = 0.06
     }
   }
 
-  user_data                   = templatefile("gitlab-runner-userdata", {})
+  user_data                   = templatefile("gitlab-runner-userdata.sh.tpl", { gitlab_token = var.gitlab_token })
   user_data_replace_on_change = true
 
-  vpc_security_group_ids = [aws_security_group.runner.id]
+  vpc_security_group_ids      = [aws_security_group.runner.id]
+  associate_public_ip_address = false
 
   tags = {
     Name = "Gitlab Runner"
@@ -45,7 +47,8 @@ resource "aws_instance" "dagger" {
 
   subnet_id = aws_subnet.private.id
 
-  key_name = var.key_pair
+  key_name             = var.key_pair
+  iam_instance_profile = aws_iam_instance_profile.instance_profile.name
 
   instance_market_options {
     market_type = "spot"
@@ -54,7 +57,8 @@ resource "aws_instance" "dagger" {
     }
   }
 
-  vpc_security_group_ids = [aws_security_group.dagger.id]
+  vpc_security_group_ids      = [aws_security_group.dagger.id]
+  associate_public_ip_address = false
 
   tags = {
     Name = "Dagger Host"

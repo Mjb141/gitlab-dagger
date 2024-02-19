@@ -10,9 +10,7 @@ Run `trivy config ./`
 
 ## Todo:
 
-Replace bastion instance + sec group etc with session manager
+* Write userdata scripts for gitlab-runner
+  * Test these before going any further
 
-Example:
-
-1) source: https://github.com/terraform-aws-modules/terraform-aws-ec2-instance/blob/v5.6.0/examples/session-manager/main.tf
-2) module: https://github.com/terraform-aws-modules/terraform-aws-ec2-instance/blob/v5.6.0/main.tf#L569
+* Write (copy existing) gitlab-runner config file
