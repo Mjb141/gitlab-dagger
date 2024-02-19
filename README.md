@@ -10,7 +10,4 @@ Run `trivy config ./`
 
 ## Todo:
 
-* Write userdata scripts for gitlab-runner
-  * Test these before going any further
-
-* Write (copy existing) gitlab-runner config file
+* Write userdata for Dagger host
