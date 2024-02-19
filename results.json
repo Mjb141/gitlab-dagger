@@ -1,0 +1,407 @@
+{
+	"kics_version": "v1.7.12",
+	"files_scanned": 6,
+	"lines_scanned": 347,
+	"files_parsed": 6,
+	"lines_parsed": 345,
+	"lines_ignored": 2,
+	"files_failed_to_scan": 0,
+	"queries_total": 1045,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"HIGH": 3,
+		"INFO": 13,
+		"LOW": 3,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 20,
+	"total_bom_resources": 0,
+	"start": "2024-02-17T20:44:13.023702238Z",
+	"end": "2024-02-17T20:44:26.538806783Z",
+	"paths": [
+		"/path"
+	],
+	"queries": [
+		{
+			"query_name": "EC2 Instance Has Public IP",
+			"query_id": "5a2486aa-facf-477d-a5c1-b010789459ce",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "EC2 Instance should not have a public IP address.",
+			"description_id": "c6f1d1f4",
+			"files": [
+				{
+					"file_name": "../../path/instances.tf",
+					"similarity_id": "12b2b763152ef277a13cf9b3fabcf790d0008cc0283426194a27e1b5b9b85ece",
+					"line": 17,
+					"resource_type": "aws_instance",
+					"resource_name": "Gitlab Runner",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.runner",
+					"search_line": 17,
+					"search_value": "",
+					"expected_value": "'associate_public_ip_address' should be defined and not null",
+					"actual_value": "'associate_public_ip_address' is undefined or null"
+				},
+				{
+					"file_name": "../../path/instances.tf",
+					"similarity_id": "574b72ac634f5bcc157873d404edb45a6b0e4f69964fe09006689096e24acc74",
+					"line": 42,
+					"resource_type": "aws_instance",
+					"resource_name": "Dagger Host",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.dagger",
+					"search_line": 42,
+					"search_value": "",
+					"expected_value": "'associate_public_ip_address' should be defined and not null",
+					"actual_value": "'associate_public_ip_address' is undefined or null"
+				},
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "42b4f6a2c16c06e0d6e88a0141e100bd806623248c12abb727f8533bafd71267",
+					"line": 84,
+					"resource_type": "aws_instance",
+					"resource_name": "Bastion",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_instance.bastion.associate_public_ip_address",
+					"search_line": 84,
+					"search_value": "",
+					"expected_value": "'associate_public_ip_address' should be set to false",
+					"actual_value": "'associate_public_ip_address' is true"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "../../path/network.tf",
+					"similarity_id": "ae78c1a1ee2f5dd4a39cb1812637819abb2f4b29b11d5cb096f41f3ca65efe75",
+					"line": 1,
+					"resource_type": "aws_vpc",
+					"resource_name": "vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[vpc]",
+					"search_line": 1,
+					"search_value": "",
+					"expected_value": "aws_vpc[vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "6ebbd029371428825377b175c6bcb52ac8c1b862b9a6e6894ace3841d66b15b6",
+					"line": 1,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "../../path/network.tf",
+					"similarity_id": "4a259b240869d964b3ae2dfc289059c59360a0522791ec46504e4f3255d28808",
+					"line": 51,
+					"resource_type": "aws_eip",
+					"resource_name": "ip",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_eip[ip]",
+					"search_line": 51,
+					"search_value": "",
+					"expected_value": "aws_eip has shield advanced associated",
+					"actual_value": "aws_eip does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "../../path/network.tf",
+					"similarity_id": "fc3303df4c76c12cf90b1de259419ee1826e48355884147e01b76fc37cdb3f2a",
+					"line": 1,
+					"resource_type": "aws_vpc",
+					"resource_name": "vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[vpc]",
+					"search_line": 1,
+					"search_value": "",
+					"expected_value": "aws_vpc[vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Instance Monitoring Disabled",
+			"query_id": "23b70e32-032e-4fa6-ba5c-82f56b9980e6",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#monitoring",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "EC2 Instance should have detailed monitoring enabled. With detailed monitoring enabled data is available in 1-minute periods",
+			"description_id": "0d5413e6",
+			"files": [
+				{
+					"file_name": "../../path/instances.tf",
+					"similarity_id": "76f3811d6df24354724ba5a95840fceeac2836e661fc520e0995068b1a3a4cab",
+					"line": 17,
+					"resource_type": "aws_instance",
+					"resource_name": "Gitlab Runner",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.{{runner}}",
+					"search_line": 17,
+					"search_value": "",
+					"expected_value": "'monitoring' should be defined and not null%!(EXTRA string=runner)",
+					"actual_value": "'monitoring' is undefined or null%!(EXTRA string=runner)",
+					"remediation": "monitoring = true",
+					"remediation_type": "addition"
+				},
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "3f98d5e1f15a03d6d14c1e6f5ffa68b8073b69969b64b6c903b2ef2ff70c5425",
+					"line": 80,
+					"resource_type": "aws_instance",
+					"resource_name": "Bastion",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.{{bastion}}",
+					"search_line": 80,
+					"search_value": "",
+					"expected_value": "'monitoring' should be defined and not null%!(EXTRA string=bastion)",
+					"actual_value": "'monitoring' is undefined or null%!(EXTRA string=bastion)",
+					"remediation": "monitoring = true",
+					"remediation_type": "addition"
+				},
+				{
+					"file_name": "../../path/instances.tf",
+					"similarity_id": "428fa7192577cad5c688241a823a8d47dc7987bf76b3a523cd4e691b9a2b4c7b",
+					"line": 42,
+					"resource_type": "aws_instance",
+					"resource_name": "Dagger Host",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.{{dagger}}",
+					"search_line": 42,
+					"search_value": "",
+					"expected_value": "'monitoring' should be defined and not null%!(EXTRA string=dagger)",
+					"actual_value": "'monitoring' is undefined or null%!(EXTRA string=dagger)",
+					"remediation": "monitoring = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Name Is Not Snake Case",
+			"query_id": "1e434b25-8763-4b00-a5ca-ca03b7abbb66",
+			"query_url": "https://www.terraform.io/docs/extend/best-practices/naming.html#naming",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All names should follow snake case pattern.",
+			"description_id": "ac707cad",
+			"files": [
+				{
+					"file_name": "../../path/security-groups.tf",
+					"similarity_id": "fcd0c3d447f606221c6f124d4c15d468abd924a05c098761381bb0bbaea469d5",
+					"line": 67,
+					"resource_type": "aws_vpc_security_group_egress_rule",
+					"resource_name": "dagger-all-out-80",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_egress_rule.dagger-all-out-80",
+					"search_line": 67,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'dagger-all-out-80' is not in snake case"
+				},
+				{
+					"file_name": "../../path/security-groups.tf",
+					"similarity_id": "cb0cf613d3c5dc9e881bf1203aaf6cc44126bcf4aa2820ccfd76b7675d1dda14",
+					"line": 43,
+					"resource_type": "aws_vpc_security_group_egress_rule",
+					"resource_name": "gitlab-all-out-80",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_egress_rule.gitlab-all-out-80",
+					"search_line": 43,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'gitlab-all-out-80' is not in snake case"
+				},
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "6651a288d07fee80cc395aa0f33ae83bfdab1362fb67858a86a5deabd4a30f4a",
+					"line": 55,
+					"resource_type": "aws_vpc_security_group_egress_rule",
+					"resource_name": "bastion-ssh-to-gitlab",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_egress_rule.bastion-ssh-to-gitlab",
+					"search_line": 55,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'bastion-ssh-to-gitlab' is not in snake case"
+				},
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "42c2e8f63bedbc9604571659d7361a15ca6a1f01a760a2448c334c271ac018b1",
+					"line": 39,
+					"resource_type": "aws_vpc_security_group_ingress_rule",
+					"resource_name": "bastion-ssh-to-gitlab",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_ingress_rule.bastion-ssh-to-gitlab",
+					"search_line": 39,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'bastion-ssh-to-gitlab' is not in snake case"
+				},
+				{
+					"file_name": "../../path/security-groups.tf",
+					"similarity_id": "e2f6295896b5b175c3f297799810ba0db02054b9da2efe8341284e04af2cd9a9",
+					"line": 55,
+					"resource_type": "aws_vpc_security_group_egress_rule",
+					"resource_name": "dagger-all-out-443",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_egress_rule.dagger-all-out-443",
+					"search_line": 55,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'dagger-all-out-443' is not in snake case"
+				},
+				{
+					"file_name": "../../path/security-groups.tf",
+					"similarity_id": "4bcb608d0b6394c567b328b1068f7e963228da9a1d46865aedf4988edb3da2f3",
+					"line": 31,
+					"resource_type": "aws_vpc_security_group_egress_rule",
+					"resource_name": "gitlab-all-out-443",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_egress_rule.gitlab-all-out-443",
+					"search_line": 31,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'gitlab-all-out-443' is not in snake case"
+				},
+				{
+					"file_name": "../../path/security-groups.tf",
+					"similarity_id": "6a0bbbbe9f01268c4ef3f3fafeff4ea4ef29f0275dc8ee95d8160ed9a6931359",
+					"line": 15,
+					"resource_type": "aws_vpc_security_group_ingress_rule",
+					"resource_name": "dagger-tcp",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_ingress_rule.dagger-tcp",
+					"search_line": 15,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'dagger-tcp' is not in snake case"
+				},
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "3ba45948e19ace495cd128a582f38b5a3e0bd278b03e65571401c99a3e9e3cbb",
+					"line": 67,
+					"resource_type": "aws_vpc_security_group_egress_rule",
+					"resource_name": "bastion-ssh-to-dagger",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_egress_rule.bastion-ssh-to-dagger",
+					"search_line": 67,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'bastion-ssh-to-dagger' is not in snake case"
+				},
+				{
+					"file_name": "../../path/bastion.tf",
+					"similarity_id": "7a66242d341cde03d917111caa8dab423e3bf0c45324dfd4e2a344f74c5944d7",
+					"line": 8,
+					"resource_type": "aws_vpc_security_group_ingress_rule",
+					"resource_name": "bastion-ssh-to-dagger",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc_security_group_ingress_rule.bastion-ssh-to-dagger",
+					"search_line": 8,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'bastion-ssh-to-dagger' is not in snake case"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Type",
+			"query_id": "fc5109bf-01fd-49fb-8bde-4492b543c34a",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid type.",
+			"description_id": "bba696eb",
+			"files": [
+				{
+					"file_name": "../../path/variables.tf",
+					"similarity_id": "c67d4cda23e6830441ae19b8c970db9106c7d417183f9e4b58a47e8063283fb5",
+					"line": 1,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{key_pair}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				}
+			]
+		}
+	]
+}
