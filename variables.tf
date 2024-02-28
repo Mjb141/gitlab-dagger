@@ -7,3 +7,8 @@ variable "gitlab_token" {
   description = "Gitlab CICD token"
   type        = string
 }
+
+variable "dagger_engine_port" {
+  description = "Port the Dagger Engine will accept queries on"
+  type        = string
+}

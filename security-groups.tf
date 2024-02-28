@@ -13,13 +13,13 @@ resource "aws_security_group" "dagger" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "dagger_tcp" {
-  description = "Allow TCP traffic on port 1234 from the Gitlab Runner instance"
+  description = "Allow TCP traffic from the Gitlab Runner instance"
 
   security_group_id = aws_security_group.dagger.id
 
   ip_protocol = "tcp"
-  from_port   = 1234
-  to_port     = 1234
+  from_port   = var.dagger_engine_port
+  to_port     = var.dagger_engine_port
 
   referenced_security_group_id = aws_security_group.runner.id
 

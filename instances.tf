@@ -43,7 +43,7 @@ resource "aws_instance" "runner" {
 
 resource "aws_instance" "dagger" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
 
   subnet_id = aws_subnet.private.id
 
@@ -53,9 +53,12 @@ resource "aws_instance" "dagger" {
   instance_market_options {
     market_type = "spot"
     spot_options {
-      max_price = 0.01
+      max_price = 0.06
     }
   }
+
+  user_data                   = templatefile("dagger-instance-userdata.sh.tpl", { dagger_engine_port = var.dagger_engine_port })
+  user_data_replace_on_change = true
 
   vpc_security_group_ids      = [aws_security_group.dagger.id]
   associate_public_ip_address = false
