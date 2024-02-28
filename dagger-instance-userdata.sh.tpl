@@ -22,6 +22,7 @@ echo "----------"
 echo "INSTALLING DAGGER CLI"
 echo "----------"
 curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
+export PATH=$PATH:/.local/bin/
 
 echo "----------"
 echo "STARTING DAGGER"
