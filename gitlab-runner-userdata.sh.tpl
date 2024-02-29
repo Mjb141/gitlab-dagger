@@ -18,11 +18,11 @@ echo \
 apt-get update -y
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-echo "----------"
-echo "INSTALLING DAGGER CLI"
-echo "----------"
-curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
-export PATH=$PATH:/.local/bin/
+# echo "----------"
+# echo "INSTALLING DAGGER CLI"
+# echo "----------"
+# curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
+# export PATH=$PATH:/.local/bin/
 
 echo "----------"
 echo "INSTALLING GITLAB RUNNER"
@@ -37,7 +37,7 @@ echo "----------"
 echo "CREATING CONFIG"
 echo "----------"
 rm /etc/gitlab-runner/config.toml
-cat > /etc/gitlab-runner/config.toml <<CONFIG
+cat >/etc/gitlab-runner/config.toml <<CONFIG
 concurrent = 1
 check_interval = 0
 shutdown_timeout = 0

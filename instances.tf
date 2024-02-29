@@ -35,6 +35,7 @@ resource "aws_instance" "runner" {
 
   vpc_security_group_ids      = [aws_security_group.runner.id]
   associate_public_ip_address = false
+  private_ip                  = "10.0.0.250"
 
   tags = {
     Name = "Gitlab Runner"
@@ -62,6 +63,7 @@ resource "aws_instance" "dagger" {
 
   vpc_security_group_ids      = [aws_security_group.dagger.id]
   associate_public_ip_address = false
+  private_ip                  = "10.0.0.251"
 
   tags = {
     Name = "Dagger Host"
