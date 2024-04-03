@@ -1,9 +1,9 @@
 {
 	"kics_version": "v1.7.12",
 	"files_scanned": 6,
-	"lines_scanned": 294,
+	"lines_scanned": 328,
 	"files_parsed": 6,
-	"lines_parsed": 292,
+	"lines_parsed": 326,
 	"lines_ignored": 2,
 	"files_failed_to_scan": 0,
 	"queries_total": 1045,
@@ -19,8 +19,8 @@
 	},
 	"total_counter": 6,
 	"total_bom_resources": 0,
-	"start": "2024-02-19T14:39:58.418378576Z",
-	"end": "2024-02-19T14:40:12.120851115Z",
+	"start": "2024-02-29T11:31:53.559474133Z",
+	"end": "2024-02-29T11:32:06.769199292Z",
 	"paths": [
 		"/path"
 	],
@@ -147,13 +147,13 @@
 			"files": [
 				{
 					"file_name": "../../path/instances.tf",
-					"similarity_id": "8f94c2e57c28c4c50cadf6ecdae96660a1d98738e9bffa7f7c8e87f4b485d95d",
-					"line": 44,
+					"similarity_id": "5ca4ae24d44a911385fbb1dc610d7884b9c40bc40d0bb449bf9f200bc1b760dd",
+					"line": 45,
 					"resource_type": "aws_instance",
 					"resource_name": "Dagger Host",
 					"issue_type": "MissingAttribute",
 					"search_key": "aws_instance.{{dagger}}",
-					"search_line": 44,
+					"search_line": 45,
 					"search_value": "",
 					"expected_value": "'monitoring' should be defined and not null%!(EXTRA string=dagger)",
 					"actual_value": "'monitoring' is undefined or null%!(EXTRA string=dagger)",
