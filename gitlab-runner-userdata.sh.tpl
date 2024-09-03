@@ -18,11 +18,11 @@ echo \
 apt-get update -y
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-# echo "----------"
-# echo "INSTALLING DAGGER CLI"
-# echo "----------"
-# curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
-# export PATH=$PATH:/.local/bin/
+echo "----------"
+echo "INSTALLING DAGGER CLI"
+echo "----------"
+curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
+export PATH=$PATH:/.local/bin/
 
 echo "----------"
 echo "INSTALLING GITLAB RUNNER"
