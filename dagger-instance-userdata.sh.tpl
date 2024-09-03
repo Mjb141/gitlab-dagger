@@ -33,6 +33,6 @@ docker run \
   --rm \
   --privileged \
   --name dagger-engine \
-  registry.dagger.io/engine:v0.11.0 \
+  registry.dagger.io/engine:v0.12.7 \
   --addr tcp://0.0.0.0:${dagger_engine_port} \
   --addr unix:///run/buildkit/buildkitd.sock
